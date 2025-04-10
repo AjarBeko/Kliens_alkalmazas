@@ -34,7 +34,7 @@ namespace Szamla_Kliensalkalmazas
         }
 
 
-        //RENDELÉSEK LEKÉRÉSE!!!
+        //RENDELÉSEK LEKÉRÉSE!!
         private void button1_Click(object sender, EventArgs e)
         {
             Api proxy = apiHivas();
