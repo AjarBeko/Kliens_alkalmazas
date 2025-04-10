@@ -206,7 +206,6 @@ namespace Szamla_Kliensalkalmazas
                 osszBrutto += brutto;
             }
 
-            // ⬇️ Táblázat beszúrása
             var p = doc.Paragraphs.FirstOrDefault(x => x.Text.Contains("{{BeszurasHelye}}"));
             if (p != null)
             {
@@ -218,25 +217,39 @@ namespace Szamla_Kliensalkalmazas
                 doc.InsertParagraph().InsertTableAfterSelf(table);
             }
 
-            //Szállítási díj
             decimal szallitasDij = 1000;
             decimal totalBruttoSzallitassal = osszBrutto + szallitasDij;
 
-            //Összegzések
             doc.ReplaceText("{{TotelGrandNetto}}", osszNetto.ToString("0.00"));
             doc.ReplaceText("{{TotelGrandAFA}}", osszAfa.ToString("0.00"));
             doc.ReplaceText("{{Szallitas}}", szallitasDij.ToString("0.00"));
             doc.ReplaceText("{{TotalGrand}}", totalBruttoSzallitassal.ToString("0.00"));
             doc.ReplaceText("{{TotelGrand}}", totalBruttoSzallitassal.ToString("0.00"));
 
-            //Új: PDF konvertálás
+            // DOCX mentés
+            doc.SaveAs(kimenetiPath);
+            doc.Dispose(); 
+
             string pdfPath = Path.ChangeExtension(kimenetiPath, ".pdf");
-            ConvertToPdf(kimenetiPath, pdfPath);
 
-            //Word törlése
-            File.Delete(kimenetiPath);
+            if (File.Exists(kimenetiPath))
+            {
+                ConvertToPdf(kimenetiPath, pdfPath);
 
-            MessageBox.Show("Számla PDF-ben elmentve: " + pdfPath);
+                if (File.Exists(pdfPath))
+                {
+                    File.Delete(kimenetiPath);
+                    MessageBox.Show("Számla PDF-ben elmentve: " + pdfPath);
+                }
+                else
+                {
+                    MessageBox.Show("Hiba: PDF nem jött létre.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Hiba: DOCX fájl nem jött létre.");
+            }
         }
 
 
