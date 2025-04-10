@@ -330,7 +330,7 @@ namespace Szamla_Kliensalkalmazas
         }
         //CÍMKE ELKÉSZÍTÉSE
 
-        private void button4_Click(object sender, EventArgs e)
+        private void guna2Button1_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0)
             {
@@ -372,7 +372,6 @@ namespace Szamla_Kliensalkalmazas
             }
         }
 
-
-
+        
     }
 }
