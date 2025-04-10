@@ -51,7 +51,7 @@ namespace Szamla_Kliensalkalmazas
 
             tabla.Columns.Add("OrderNumber");
             tabla.Columns.Add("OrderBvin");
-            tabla.Columns.Add("OrderDate");              // 🕒 ÚJ
+            tabla.Columns.Add("OrderDate");             
             tabla.Columns.Add("UserEmail");
             tabla.Columns.Add("TotalGrand");
             tabla.Columns.Add("BillingName");
@@ -104,7 +104,7 @@ namespace Szamla_Kliensalkalmazas
                 return;
             }
 
-            // 🔍 OrderBvin lekérése
+            //OrderBvin lekérése
             string orderBvin = dataGridView1.SelectedRows[0].Cells["OrderBvin"].Value.ToString();
 
             Api proxy = apiHivas();
@@ -119,7 +119,7 @@ namespace Szamla_Kliensalkalmazas
 
             var order = response.Content;
 
-            // 🔽 Termékek táblázat létrehozása
+            //Termékek táblázat létrehozása
             DataTable termekTabla = new DataTable();
             termekTabla.Columns.Add("Termék neve");
             termekTabla.Columns.Add("Mennyiség");
@@ -149,25 +149,25 @@ namespace Szamla_Kliensalkalmazas
 
             var doc = DocX.Load(sablonPath);
 
-            // 🧾 Random sorszám mezők
+            //Random sorszám mezők
             Random rnd = new Random();
             doc.ReplaceText("{{randomszam1}}", rnd.Next(100000, 999999).ToString());
             doc.ReplaceText("{{randomszam2}}", rnd.Next(100000, 999999).ToString());
             doc.ReplaceText("{{randomszam3}}", rnd.Next(100000, 999999).ToString());
 
-            // 🕒 Dátumok
+            //Dátumok
             DateTime kelte = order.TimeOfOrderUtc.ToLocalTime();
             DateTime teljesites = kelte.AddDays(2);
             doc.ReplaceText("{{OrderDate}}", kelte.ToString("yyyy.MM.dd"));
             doc.ReplaceText("{{OrderDate2}}", teljesites.ToString("yyyy.MM.dd"));
 
-            // 🔁 Számlázási adatok
+            //Számlázási adatok
             doc.ReplaceText("{{BillingName}}", $"{order.BillingAddress.FirstName} {order.BillingAddress.LastName}");
             doc.ReplaceText("{{BillingCity}}", order.BillingAddress.City);
             doc.ReplaceText("{{BillingStreet}}", order.BillingAddress.Line1);
             doc.ReplaceText("{{Iranyito}}", order.BillingAddress.PostalCode ?? "0000");
 
-            // 📊 Táblázat létrehozása
+            //Táblázat létrehozása
             var table = doc.AddTable(order.Items.Count + 1, 7);
             table.Design = TableDesign.TableGrid;
 
@@ -217,11 +217,11 @@ namespace Szamla_Kliensalkalmazas
                 doc.InsertParagraph().InsertTableAfterSelf(table);
             }
 
-            // 🚚 Szállítási díj
+            //Szállítási díj
             decimal szallitasDij = 1000;
             decimal totalBruttoSzallitassal = osszBrutto + szallitasDij;
 
-            // 📌 Összegzések
+            //Összegzések
             doc.ReplaceText("{{TotelGrandNetto}}", osszNetto.ToString("0.00"));
             doc.ReplaceText("{{TotelGrandAFA}}", osszAfa.ToString("0.00"));
             doc.ReplaceText("{{Szallitas}}", szallitasDij.ToString("0.00"));
@@ -277,7 +277,7 @@ namespace Szamla_Kliensalkalmazas
                              ? random1
                              : order.BillingAddress.Phone;
 
-            // 📦 Vonalkód generálás
+            //Vonalkód generálás
             string kod = $"PP-{order.OrderNumber}-{new Random().Next(1000, 9999)}";
             Barcode b = new Barcode();
             System.Drawing.Image vonalkodKep = b.Encode(TYPE.CODE128, kod, Color.Black, Color.White, 300, 100);
@@ -286,7 +286,7 @@ namespace Szamla_Kliensalkalmazas
 
             var doc = DocX.Load(sablonPath);
 
-            // 🔁 Mezők cseréje
+            //Mezők cseréje
             doc.ReplaceText("{{BillingName}}", $"{order.BillingAddress.FirstName} {order.BillingAddress.LastName}");
             doc.ReplaceText("{{BillingStreet}}", order.BillingAddress.Line1);
             doc.ReplaceText("{{Billing City}}", order.BillingAddress.City);
@@ -298,7 +298,7 @@ namespace Szamla_Kliensalkalmazas
             doc.ReplaceText("{{TotalGrand}}", vegosszeg.ToString("0.00"));
             doc.ReplaceText("{{Mennyiseg}}", mennyiseg.ToString());
 
-            // 🖼️ Vonalkép beszúrása
+            //Vonalkép beszúrása
             var kepHely = doc.Paragraphs.FirstOrDefault(x => x.Text.Contains("{{VonalkodHelye}}"));
             if (kepHely != null)
             {
@@ -308,7 +308,7 @@ namespace Szamla_Kliensalkalmazas
                 kepHely.AppendPicture(picture).Alignment = Alignment.center;
             }
 
-            // 💾 Mentés
+            //Mentés
             doc.SaveAs(kimenetiPath);
             MessageBox.Show("Címke generálva: " + kimenetiPath);
 
