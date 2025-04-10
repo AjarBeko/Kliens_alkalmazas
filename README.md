@@ -1,2 +1,0 @@
-# Kliens_alkalmazas
-Kliens_alkalmazas_fejlesztese
