@@ -11,9 +11,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Hotcakes.Web;
 using Novacode;
-using System.IO;
+using System.IO; 
 using BarcodeLib;
 using Hotcakes.Web.Barcodes;
+using Word = Microsoft.Office.Interop.Word;
 
 
 namespace Szamla_Kliensalkalmazas
@@ -34,7 +35,7 @@ namespace Szamla_Kliensalkalmazas
         }
 
 
-        //RENDELÉSEK LEKÉRÉSE!!
+        //RENDELÉSEK LEKÉRÉSE!!!
         private void button1_Click(object sender, EventArgs e)
         {
             Api proxy = apiHivas();
@@ -228,8 +229,14 @@ namespace Szamla_Kliensalkalmazas
             doc.ReplaceText("{{TotalGrand}}", totalBruttoSzallitassal.ToString("0.00"));
             doc.ReplaceText("{{TotelGrand}}", totalBruttoSzallitassal.ToString("0.00"));
 
-            doc.SaveAs(kimenetiPath);
-            MessageBox.Show("Számla elkészült: " + kimenetiPath);
+            //Új: PDF konvertálás
+            string pdfPath = Path.ChangeExtension(kimenetiPath, ".pdf");
+            ConvertToPdf(kimenetiPath, pdfPath);
+
+            //Word törlése
+            File.Delete(kimenetiPath);
+
+            MessageBox.Show("Számla PDF-ben elmentve: " + pdfPath);
         }
 
 
@@ -309,8 +316,16 @@ namespace Szamla_Kliensalkalmazas
             }
 
             //Mentés
-            doc.SaveAs(kimenetiPath);
-            MessageBox.Show("Címke generálva: " + kimenetiPath);
+            doc.SaveAs(kimenetiPath); // DOCX mentés
+
+            //Új: PDF konvertálás
+            string pdfPath = Path.ChangeExtension(kimenetiPath, ".pdf");
+            ConvertToPdf(kimenetiPath, pdfPath);
+
+            //Word törlése
+            File.Delete(kimenetiPath);
+
+            MessageBox.Show("Cimke PDF-ben elmentve: " + pdfPath);
 
         }
         //CÍMKE ELKÉSZÍTÉSE
@@ -336,6 +351,26 @@ namespace Szamla_Kliensalkalmazas
             GeneralCimke(response.Content);
         }
 
+        //PDF generálás
+        private void ConvertToPdf(string docxPath, string pdfPath)
+        {
+            Word.Application wordApp = new Word.Application();
+            Word.Document wordDoc = null;
+
+            try
+            {
+                wordDoc = wordApp.Documents.Open(docxPath);
+                wordDoc.ExportAsFixedFormat(pdfPath, Word.WdExportFormat.wdExportFormatPDF);
+            }
+            finally
+            {
+                if (wordDoc != null)
+                {
+                    wordDoc.Close(false);
+                }
+                wordApp.Quit();
+            }
+        }
 
 
 
