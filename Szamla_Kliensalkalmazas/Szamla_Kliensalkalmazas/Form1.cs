@@ -95,7 +95,7 @@ namespace Szamla_Kliensalkalmazas
             textBox1.Text = tabla.Rows.Count.ToString();
         }
 
-        //TERMÉKEKHEZ TARTOZÓ RENDELÉSEK LEKÉRÉSE
+        //RENDELÉSEKHEZ TARTOZÓ TERMÉKEK LEKÉRÉSE
 
         private void button2_Click(object sender, EventArgs e)
         {
