@@ -318,7 +318,7 @@ namespace Szamla_Kliensalkalmazas
             doc.ReplaceText("{{TotalGrand}}", vegosszeg.ToString("0.00"));
             doc.ReplaceText("{{Mennyiseg}}", mennyiseg.ToString());
 
-            //Vonalkép beszúrása
+            //Vonalkód beszúrása
             var kepHely = doc.Paragraphs.FirstOrDefault(x => x.Text.Contains("{{VonalkodHelye}}"));
             if (kepHely != null)
             {
