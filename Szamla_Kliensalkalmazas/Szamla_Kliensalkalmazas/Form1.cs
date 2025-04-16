@@ -24,6 +24,22 @@ namespace Szamla_Kliensalkalmazas
         public Form1()
         {
             InitializeComponent();
+            //DESIGN ELEMEK
+            guna2CirclePictureBox1.Image = Properties.Resources.polovektor_beige_kor_simasvg;
+
+            label4.Text = "© 2025 PixelPress. Minden jog fenntartva.";
+            label4.TextAlign = ContentAlignment.MiddleCenter;
+            label4.AutoSize = false;
+            label4.Size = new Size(guna2CirclePictureBox1.Width, 20);
+            label4.Font = new Font("Segoe UI", 8F, FontStyle.Italic);
+            label4.ForeColor = Color.DimGray;
+            label4.BackColor = Color.Transparent;
+
+            label4.Location = new Point(
+                guna2CirclePictureBox1.Left,
+                guna2CirclePictureBox1.Bottom + 5
+            );
+
         }
 
         private static Api apiHivas()
@@ -36,7 +52,7 @@ namespace Szamla_Kliensalkalmazas
 
 
         //RENDELÉSEK LEKÉRÉSE!!!
-        private void button1_Click(object sender, EventArgs e)
+        private void guna2Button3_Click(object sender, EventArgs e)
         {
             Api proxy = apiHivas();
 
@@ -89,24 +105,24 @@ namespace Szamla_Kliensalkalmazas
                 tabla.Rows.Add(row);
             }
 
-            dataGridView1.DataSource = tabla;
-            dataGridView1.Columns["OrderBvin"].Visible = false;
+            guna2DataGridView1.DataSource = tabla;
+            guna2DataGridView1.Columns["OrderBvin"].Visible = false;
 
             textBox1.Text = tabla.Rows.Count.ToString();
         }
 
         //RENDELÉSEKHEZ TARTOZÓ TERMÉKEK LEKÉRÉSE
 
-        private void button2_Click(object sender, EventArgs e)
+        private void guna2Button4_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 0)
+            if (guna2DataGridView1.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Előbb válassz ki egy rendelést!");
                 return;
             }
 
             //OrderBvin lekérése
-            string orderBvin = dataGridView1.SelectedRows[0].Cells["OrderBvin"].Value.ToString();
+            string orderBvin = guna2DataGridView1.SelectedRows[0].Cells["OrderBvin"].Value.ToString();
 
             Api proxy = apiHivas();
 
@@ -137,7 +153,7 @@ namespace Szamla_Kliensalkalmazas
                 termekTabla.Rows.Add(row);
             }
 
-            dataGridView2.DataSource = termekTabla;
+            guna2DataGridView2.DataSource = termekTabla;
         }
 
         //SZÁMLA GENERÁLÁSA
@@ -255,15 +271,15 @@ namespace Szamla_Kliensalkalmazas
 
 
         //SZÁMLA ELKÉSZÍTÉSE
-        private void button3_Click(object sender, EventArgs e)
+        private void guna2Button2_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 0)
+            if (guna2DataGridView1.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Válassz ki egy rendelést a számlához!");
                 return;
             }
 
-            string orderBvin = dataGridView1.SelectedRows[0].Cells["OrderBvin"].Value.ToString();
+            string orderBvin = guna2DataGridView1.SelectedRows[0].Cells["OrderBvin"].Value.ToString();
             Api proxy = apiHivas();
             var response = proxy.OrdersFind(orderBvin);
 
@@ -345,13 +361,13 @@ namespace Szamla_Kliensalkalmazas
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 0)
+            if (guna2DataGridView1.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Előbb válassz ki egy rendelést!");
                 return;
             }
 
-            string orderBvin = dataGridView1.SelectedRows[0].Cells["OrderBvin"].Value.ToString();
+            string orderBvin = guna2DataGridView1.SelectedRows[0].Cells["OrderBvin"].Value.ToString();
             Api proxy = apiHivas();
             var response = proxy.OrdersFind(orderBvin);
 
@@ -385,6 +401,6 @@ namespace Szamla_Kliensalkalmazas
             }
         }
 
-        
+       
     }
 }
