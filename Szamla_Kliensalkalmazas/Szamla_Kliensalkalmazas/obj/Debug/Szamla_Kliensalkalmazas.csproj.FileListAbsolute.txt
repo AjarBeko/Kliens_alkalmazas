@@ -85,3 +85,4 @@ C:\Users\Asus\Source\Repos\Kliens_alkalmazas\Szamla_Kliensalkalmazas\Szamla_Klie
 C:\Users\Asus\Source\Repos\Kliens_alkalmazas\Szamla_Kliensalkalmazas\Szamla_Kliensalkalmazas\obj\Debug\Szamla_Kliensalkalmazas.exe.config
 C:\Users\Asus\Source\Repos\Kliens_alkalmazas\Szamla_Kliensalkalmazas\Szamla_Kliensalkalmazas\obj\Debug\Szamla_Kliensalkalmazas.csproj.ResolveComReference.cache
 C:\Users\Asus\Source\Repos\Kliens_alkalmazas\Szamla_Kliensalkalmazas\Szamla_Kliensalkalmazas\bin\Debug\Guna.UI2.dll
+C:\Users\Asus\Source\Repos\Kliens_alkalmazas\Szamla_Kliensalkalmazas\Szamla_Kliensalkalmazas\obj\Debug\Szamla_Kliensalkalmazas.LoginForm.resources

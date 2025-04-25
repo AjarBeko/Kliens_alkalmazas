@@ -63,9 +63,49 @@ namespace Szamla_Kliensalkalmazas.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap closed_eyes {
+            get {
+                object obj = ResourceManager.GetObject("closed-eyes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap eyeball_icon_png_eye_icon_1 {
+            get {
+                object obj = ResourceManager.GetObject("eyeball-icon-png-eye-icon-1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap login_password_3 {
+            get {
+                object obj = ResourceManager.GetObject("login-password-3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap polovektor_beige_kor_simasvg {
             get {
                 object obj = ResourceManager.GetObject("polovektor_beige_kor_simasvg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Sample_User_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Sample_User_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
