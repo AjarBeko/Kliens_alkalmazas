@@ -24,7 +24,7 @@ namespace Szamla_Kliensalkalmazas
         public Form1()
         {
             InitializeComponent();
-            //DESIGN ELEMEK
+            //DESIGN ELEMEK 
             guna2CirclePictureBox1.Image = Properties.Resources.polovektor_beige_kor_simasvg;
 
             label4.Text = "© 2025 PixelPress. Minden jog fenntartva.";
