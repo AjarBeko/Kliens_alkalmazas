@@ -84,7 +84,7 @@ namespace Szamla_Kliensalkalmazas
 
                 row["OrderNumber"] = order.OrderNumber;
                 row["OrderBvin"] = order.bvin;
-                row["OrderDate"] = order.TimeOfOrderUtc.ToLocalTime().ToString("yyyy.MM.dd HH:mm");  // ⬅️ dátum
+                row["OrderDate"] = order.TimeOfOrderUtc.ToLocalTime().ToString("yyyy.MM.dd HH:mm"); 
                 row["UserEmail"] = order.UserEmail;
                 row["TotalGrand"] = order.TotalGrand.ToString("0.00");
 
